@@ -1,0 +1,70 @@
+<!-- Header -->
+<section id="header">
+  <app-perfil></app-perfil>
+  <app-navi [navItems]="navItems"></app-navi>
+</section>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <!-- Main -->
+  <div id="main" *ngIf="pessoaLogada.departamento.id == 1">
+
+    <!-- One -->
+    <section #userReportRef>
+      <div class="container">
+        <h4>Relatório de Usuários</h4>
+        <div class="table-wrapper">
+          <table class="alt">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nome do Usuário</th>
+                <th>Departamento</th>
+                <th>Função</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of pessoa">
+                <td>{{item.id}}</td>
+                <td>{{item.nome}}</td>
+                <td>{{item.departamento.nome}}</td>
+                <td>{{item.funcao.nome}}</td>
+                <td *ngIf="item.ativo == true">Ativo</td>
+                <td *ngIf="item.ativo == false">Inativo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Two -->
+    <section #activityControlRef>
+      <div class="container">
+        <h4>Controle de Atividades</h4>
+        <div class="table-wrapper">
+          <table class="alt">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Pessoa</th>
+                <th>Data - Hora</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of logEntrada">
+                <td>{{item.id}}</td>
+                <td>{{item.pessoa.nome}}</td>
+                <td>{{item.dataLog}} - {{item.horaLog}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<app-footer></app-footer>

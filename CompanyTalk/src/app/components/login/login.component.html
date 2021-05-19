@@ -1,0 +1,14 @@
+<div width="100%" height="100%" style="background-color: RGB(119, 215, 188);">
+  <section class="section-login">
+    <form class="form-signin" method="GET">
+      <h1 class="h3 mb-3"><img src="http://localhost:4200/assets/images/CompanyLogoVerde.jpeg" width="215px"></h1>
+      <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Usuário ou e-mail"
+        [(ngModel)]="login" autofocus>
+      <input type="password" name="senha" id="inputPassword" class="form-control" placeholder="Senha"
+        [(ngModel)]="senha">
+      <div class="checkbox mb-3">
+        <button class="btn primary btn-lg btn-success" type="submit" (click)="logar()">Entrar</button>
+      </div>
+    </form>
+  </section>
+</div>

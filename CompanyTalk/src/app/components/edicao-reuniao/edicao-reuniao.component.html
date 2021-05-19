@@ -1,0 +1,94 @@
+<!-- Header -->
+<section id="header">
+  <app-perfil></app-perfil>
+  <app-navi [navItems]="navItems"></app-navi>
+</section>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <!-- Main -->
+  <div id="main">
+
+    <!-- One -->
+    <section #criacaoRef>
+      <div class="container">
+        <h3>Criar reuniao</h3>
+        <form method="post" action="#">
+          <div class="row gtr-uniform">
+            <div class="col-12">
+              <input type="text" name="assunto" id="assunto" placeholder="Assunto" [(ngModel)]="reuniaoAssunto" />
+            </div>
+            <div class="col-12">
+              <input type="text" name="dataReuniao" id="dataReuniao" placeholder="Data da reunião. Ex: 31/12/2021"
+                [(ngModel)]="reuniaoData" />
+            </div>
+            <div class="col-12">
+              <input type="text" name="horarioInicio" id="horarioInicio" placeholder="Horário início. Ex: 23:59"
+                [(ngModel)]="reuniaoHoraInicio" />
+            </div>
+            <div class="col-12">
+              <input type="text" name="horarioFinal" id="horarioFinal" placeholder="Horário final. Ex: 23:59"
+                [(ngModel)]="reuniaoHoraFinal" />
+            </div>
+            <div class="col-12">
+              <textarea name="corpoReuniao" id="corpoReuniao" placeholder="Descrição" rows="6"
+                [(ngModel)]="reuniaoTexto"></textarea>
+            </div>
+            <div class="col-12">
+              <ul class="actions">
+                <li>
+                  <input type="submit" class="primary" value="Criar Reunião" (click)="criarReuniao()" />
+                </li>
+                <li>
+                  <input type="reset" value="Limpar Campos" (click)="limparCampos(true)" />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Two -->
+    <section #edicaoRef>
+      <div class="container">
+        <h3>Editar o reuniao</h3>
+        <form method="post" action="#">
+          <div class="row gtr-uniform">
+            <div class="col-12">
+              <input type="text" name="assunto" id="assunto" placeholder="Assunto" [(ngModel)]="reuniaoAssuntoAlterar"
+                [disabled]="reuniaoId == 0" />
+            </div>
+            <div class="col-12">
+              <input type="text" name="dataReuniao" id="dataReuniao" placeholder="Data da reunião. Ex: 31/12/2021"
+                [(ngModel)]="reuniaoDataAlterar" [disabled]="reuniaoId == 0" />
+            </div>
+            <div class="col-12">
+              <input type="text" name="horarioInicio" id="horarioInicio" placeholder="Horário início. Ex: 23:59"
+                [(ngModel)]="reuniaoHoraInicioAlterar" [disabled]="reuniaoId == 0" />
+            </div>
+            <div class="col-12">
+              <input type="text" name="horarioFinal" id="horarioFinal" placeholder="Horário final. Ex: 23:59"
+                [(ngModel)]="reuniaoHoraFinalAlterar" [disabled]="reuniaoId == 0" />
+            </div>
+            <div class="col-12">
+              <textarea name="corpoReuniao" id="corpoReuniao" placeholder="Descrição" rows="6"
+                [(ngModel)]="reuniaoTextoAlterar" [disabled]="reuniaoId == 0"></textarea>
+            </div>
+            <div class="col-12">
+              <ul class="actions">
+                <li><input type="submit" class="primary" value="Editar Reunião" (click)="alterarReuniao()"
+                    [disabled]="reuniaoId == 0" /></li>
+                <li><input type="reset" value="Limpar Campos" (click)="limparCampos()" [disabled]="reuniaoId == 0" />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>
+
+<app-footer></app-footer>

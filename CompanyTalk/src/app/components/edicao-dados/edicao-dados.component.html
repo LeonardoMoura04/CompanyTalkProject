@@ -1,0 +1,137 @@
+<!-- Header -->
+<section id="header">
+  <!-- <header>
+    <span class="image avatar"><img src="../../assets/images/profile.png" alt="" /></span>
+    <h1 id="logo"><a routerLink="dashboard">João Silva</a></h1>
+    <p>Gerente de Projetos<br />
+      Departamento de Tecnologia</p>
+  </header> -->
+
+  <app-perfil></app-perfil>
+  <app-navi [navItems]="navItems"></app-navi>
+
+  <!-- <nav id="nav">
+    <ul>
+      <li><a routerLink="dashboard">Home</a></li>
+      <li><a routerLink="./" fragment="one" class="active">Cadastrar Usuários</a></li>
+      <li><a routerLink="./" fragment="two">Consultar Usuários</a></li>
+      <li><a routerLink="./" fragment="three">Alterar Usuários</a></li>
+    </ul>
+  </nav> -->
+</section>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <!-- Main -->
+  <div id="main" *ngIf="pessoa.departamento.id == 1">
+
+    <!-- One -->
+    <section #cadastrarRef>
+      <div class="container">
+        <h3>Cadastrar Usuário</h3>
+        <form method="post" action="#">
+          <div class="row gtr-uniform">
+            <div class="col-12"><input type="text" name="cpf" id="cpf" placeholder="CPF" [(ngModel)]="pessoaCpf" /></div>
+            <div class="col-12"><input type="text" name="name" id="name" placeholder="Nome" [(ngModel)]="pessoaNome" /></div>
+            <select [(ngModel)]="pessoaSexo" class="custom-select" name="sexo" style="padding-top: 0; margin-top: 2em; margin-left: 40px;">
+              <option value="">Selecione o Sexo</option>
+              <option *ngFor="let item of sexo" value="{{item.nome}}">{{item.nome}}</option>
+            </select>
+            <div class="col-12"><input type="text" name="dataNascimento" id="dataNascimento" placeholder="Data de Nascimento. Ex: 31/12/2021" [(ngModel)]="pessoaDataNascimento" /></div>
+            <div class="col-12"><input type="text" name="telefone" id="telefone" placeholder="Telefone. Ex: (19) 99999-9999" [(ngModel)]="pessoaTelefone" /></div>
+            <div class="col-12"><input type="email" name="email" id="email" placeholder="E-mail" [(ngModel)]="pessoaEmail" /></div>
+            <select [(ngModel)]="pessoaFuncao" class="custom-select" placeholder="Selecione uma função" name="funcao" style="padding-top: 0; margin-top: 2em; margin-left: 40px;">
+              <option value="">Selecione uma função</option>
+              <option *ngFor="let item of funcoes" value="{{item.id}}">{{item.id}} - {{item.nome}}</option>
+            </select>
+            <select [(ngModel)]="pessoaDepartamento" name="departamento" placeholder="Selecione um departamento" class="custom-select" style="padding-top: 0; margin-top: 2em; margin-left: 40px;">
+              <option value="">Selecione um departamento</option>
+              <option *ngFor="let item of departamentos" value="{{item.id}}">{{item.id}} - {{item.nome}}</option>
+            </select>
+            <div class="col-12"><input type="password" name="senha" id="senha" placeholder="Senha" [(ngModel)]="pessoaSenha" /></div>
+          </div>
+          <br>
+          <div class="col-12">
+            <ul class="actions">
+              <li><input type="submit" class="primary" value="Cadastrar Usuários" (click)="criarPessoa()" /></li>
+              <li><input type="reset" value="Limpar Campos" /></li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Two -->
+    <section #consultarRef>
+      <div class="container">
+        <h3>Consultar Usuário</h3>
+        <div class="table-wrapper">
+          <table class="alt">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nome do Usuário</th>
+                <th>Departamento - Função</th>
+                <th>Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of pessoas">
+                <td>{{item.id}}</td>
+                <td>{{item.nome}}</td>
+                <td>{{item.departamento.nome}} - {{item.funcao.nome}}</td>
+                <td>
+                  <ul class="actions" style="margin: 10px; padding-left: 30px;">
+                    <li>
+                      <form action="#three"><input type="submit" class="primary" value="Alterar" (click)="preencherCampos(item)" /></form>
+                    </li>
+                    <li><input *ngIf="item.ativo" type="reset" value="Desativar" (click)="desativarPessoa(item)" /></li>
+                    <li><input *ngIf="!item.ativo" type="reset" value="Ativar" (click)="desativarPessoa(item)" /></li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three -->
+    <section #alterarRef>
+      <div class="container">
+        <h3>Alterar Usuário</h3>
+        <form method="put" action="#">
+          <div class="row gtr-uniform">
+            <div class="col-12"><input type="text" name="id" id="id" placeholder="Id" [(ngModel)]="pessoaIdAlterar" disabled/></div>
+            <div class="col-12"><input type="text" name="cpf" id="cpf" placeholder="CPF" [(ngModel)]="pessoaCpfAlterar" disabled/></div>
+            <div class="col-12"><input type="text" name="name" id="name" placeholder="Nome" [(ngModel)]="pessoaNomeAlterar" /></div>
+            <select [(ngModel)]="pessoaSexoAlterar" name="sexo" class="custom-select" style="padding-top: 0; margin-top: 2em; margin-left: 40px;">
+              <option *ngFor="let item of sexo" value="{{item.nome}}">{{item.nome}}</option>
+            </select>
+            <div class="col-12"><input type="text" name="dataNascimento" id="dataNascimento" placeholder="Data de Nascimento. Ex: 31/12/2021" [(ngModel)]="pessoaDataNascimentoAlterar" /></div>
+            <div class="col-12"><input type="text" name="telefone" id="telefone" placeholder="Telefone. Ex: (19) 99999-9999" [(ngModel)]="pessoaTelefoneAlterar" /></div>
+            <div class="col-12"><input type="email" name="email" id="email" placeholder="E-mail" [(ngModel)]="pessoaEmailAlterar" /></div>
+            <select [(ngModel)]="pessoaFuncaoAlterar" name="funcao" class="custom-select" style="padding-top: 0; margin-top: 2em; margin-left: 40px;">
+              <option value="">Selecione uma função</option>
+              <option *ngFor="let item of funcoes" value="{{item.id}}">{{item.id}} - {{item.nome}}</option>
+            </select>
+            <select [(ngModel)]="pessoaDepartamentoAlterar" name="departamento" class="custom-select" style="padding-top: 0; margin-top: 2em; margin-left: 40px;">
+              <option value="">Selecione um departamento</option>
+              <option *ngFor="let item of departamentos" value="{{item.id}}">{{item.id}} - {{item.nome}}</option>
+            </select>
+            <div class="col-12"><input type="password" name="senha" id="senha" placeholder="Senha" [(ngModel)]="pessoaSenhaAlterar" /></div>
+          </div>
+          <br>
+          <div class="col-12">
+            <ul class="actions">
+              <li><input type="submit" class="primary" value="Editar Usuário" (click)="alterarPessoa(pessoaIdAlterar)" /></li>
+              <li><input type="reset" value="Limpar Campos" /></li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <app-footer></app-footer>

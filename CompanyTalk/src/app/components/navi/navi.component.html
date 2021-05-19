@@ -1,0 +1,9 @@
+<div id="header" style="margin-top: 500px;">
+  <nav id="nav">
+    <ul>
+      <li *ngFor="let item of navItems; index as i">
+        <a (click)="navigate(item)" class="scrolly" [ngClass]="{'active': item.selected}">{{item.text}}</a>
+      </li>
+    </ul>
+  </nav>
+</div>

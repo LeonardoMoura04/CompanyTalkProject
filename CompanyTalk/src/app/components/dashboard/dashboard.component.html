@@ -1,0 +1,107 @@
+<!-- Header -->
+<section id="header">
+  <app-perfil></app-perfil>
+  <app-navi [navItems]=navItems></app-navi>
+</section>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <!-- Main -->
+  <div id="main">
+
+    <!-- One -->
+    <section #feedRef>
+      <div class="main text-center" data-position="center">
+        <img src="../../assets/images/CompanyLogoVerde.jpeg" style="margin-top: 75px;"/>
+      </div>
+      <div class="container">
+        <h3>Feed de Notícias</h3>
+        <h4>{{getDateReuniao()}}</h4>
+        <p>Aqui, nesta seção você encontrará as melhores notícias da nossa empresa! Deixando nosso
+          colaborador, sempre atualizado sobre o que acontece aqui dentro da organização.</p>
+        <div class="features">
+          <div *ngFor="let item of feed; index as i">
+            <article>
+              <a href="#" class="image"><img src="../../assets/images/{{item.linkImagem}}.jpg" alt="" /></a>
+              <div class="inner">
+                <h4>{{item.titulo}}</h4>
+                <p>{{item.corpoFeed}}</p>
+              </div>
+            </article>
+            <div class="col-12" *ngIf="pessoa.departamento.id == 2">
+              <ul class="actions">
+                <li>
+                  <button class="btn primary btn-lg btn-success" (click)="edicaoFeed(item.id)">Editar</button>
+                  <button class="btn primary btn-lg btn-danger" style="margin-left: 15px;" (click)="deletarFeed(item.id, i)">Deletar</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Two -->
+    <section #meetingRef>
+      <div class="container">
+        <h3>Reuniões</h3>
+        <h4>{{getDateReuniao()}}</h4>
+        <div class="table-wrapper">
+          <table class="alt">
+            <thead>
+              <tr>
+                <th>Dono da reunião</th>
+                <th>Assunto</th>
+                <th>Hora</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of reuniao; index as i">
+                <td>{{item.pessoa.nome}}</td>
+                <td>{{item.assunto}}</td>
+                <td>{{item.horarioReuniaoInicio.substring(0, 5)}} - {{item.horarioReuniaoFinal.substring(0, 5)}}</td>
+                <td>
+                  <ul class="actions" style="margin: 10px;" *ngIf="item.pessoa.id == pessoa.id">
+                    <li>
+                      <button class="btn primary btn-lg btn-success" (click)="edicaoReuniao(item.id)">Editar</button>
+                    </li>
+                    <li>
+                      <button class="btn primary btn-lg btn-danger" style="margin-left: 15px;" (click)="deletarReuniao(item.id, i)">Deletar</button>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three -->
+    <section #emailRef>
+      <div class="container">
+        <h3>Enviar um e-mail</h3>
+        <p>Envie aqui de forma rápida e fácil um e-mail para qualquer membro da organização!</p>
+        <form method="post" action="#">
+          <div class="row gtr-uniform">
+            <div class="col-12"><input type="email" name="email" id="email" placeholder="Email" [(ngModel)]="destinatario" /></div>
+            <div class="col-12"><input type="text" name="subject" id="subject" placeholder="Assunto" [(ngModel)]="assunto" />
+            </div>
+            <div class="col-12"><textarea name="message" id="message" placeholder="Mensagem" rows="6" [(ngModel)]="textoEmail"></textarea>
+            </div>
+            <div class="col-12">
+              <ul class="actions">
+                <li><input type="submit" class="primary" value="Enviar Mensagem" (click)='enviarEmail()' /></li>
+                <li><input type="reset" value="Limpar" (click)='limparCamposEmail()' /></li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>
+
+<app-footer></app-footer>

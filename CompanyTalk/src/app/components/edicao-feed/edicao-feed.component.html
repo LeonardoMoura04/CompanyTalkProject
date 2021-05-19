@@ -1,0 +1,69 @@
+<!-- Header -->
+<section id="header">
+  <app-perfil></app-perfil>
+  <app-navi [navItems]="navItems"></app-navi>
+</section>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <!-- Main -->
+  <div id="main">
+
+    <!-- One -->
+    <section #criacaoRef>
+      <div class="container">
+        <h3>Criar feed</h3>
+        <form method="post" action="#">
+          <div class="row gtr-uniform">
+            <div class="col-12">
+              <input type="text" name="title" id="title" placeholder="Título" [(ngModel)]="feedTitle" [disabled]="pessoa.departamento.id != 2"/>
+            </div>
+            <div class="col-12">
+              <input type="text" name="imageURL" id="imageURL" placeholder="Imagem (URL)" [(ngModel)]="feedImage" [disabled]="pessoa.departamento.id != 2" />
+            </div>
+            <div class="col-12">
+              <textarea name="text" id="text" placeholder="Texto" rows="6" [(ngModel)]="feedText" [disabled]="pessoa.departamento.id != 2" ></textarea>
+            </div>
+            <div class="col-12">
+              <ul class="actions">
+                <li>
+                  <input type="submit" class="primary" value="Criar Feed" (click)="criarFeed()" [disabled]="pessoa.departamento.id != 2" />
+                </li>
+                <li>
+                  <input type="reset" value="Limpar Campos" (click)="limparCampos(true)" [disabled]="pessoa.departamento.id != 2" />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Two -->
+    <section #edicaoRef>
+      <div class="container">
+        <h3>Editar o feed</h3>
+        <form method="put" action="#">
+          <div class="row gtr-uniform">
+            <div class="col-12"><input type="text" name="title" id="title" placeholder="Título"
+                [(ngModel)]="feedTitleAlterar" [disabled]="feedId == 0" /></div>
+            <div class="col-12"><input type="text" name="imageURL" id="imageURL" placeholder="Imagem (URL)"
+                [(ngModel)]="feedImageAlterar" [disabled]="feedId == 0" /></div>
+            <div class="col-12"><textarea name="text" id="text" placeholder="Texto" [(ngModel)]="feedTextAlterar"
+                rows="6" [disabled]="feedId == 0"></textarea></div>
+            <div class="col-12">
+              <ul class="actions">
+                <li><input type="submit" class="primary" value="Editar Feed" (click)="alterarFeed()"
+                    [disabled]="feedId == 0" /></li>
+                <li><input type="reset" value="Limpar Campos" (click)="limparCampos()" [disabled]="feedId == 0" /></li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>
+
+<app-footer></app-footer>

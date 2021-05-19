@@ -1,0 +1,9 @@
+<header *ngIf="pessoa">
+  <!-- <span class="image avatar"><img [src]="'/assets/images/Profile_Pictures/' + profilePicture" [alt]="'/assets/images/' + default" /></span> -->
+  <span class="image avatar"><img src="http://localhost:4200/assets/images/Profile/{{pessoa.id}}.jpg"
+    onerror="this.onerror=null; this.src='assets/images/Profile/man.png'" /></span>
+  <h1 id="logo"><a routerLink="dashboard" style="text-decoration: none;">{{pessoa.nome}}</a></h1>
+  <p>{{funcao.nome}}<br />
+    {{departamento.nome}}</p>
+    <button class="btn primary btn-lg btn-danger" (click)="deslogar()">Deslogar</button>
+</header>
